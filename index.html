@@ -6,15 +6,17 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body ng-controller="StoreController as store" >
-    <h1>Flatlander Crafted Gems</h1>
-    <h2>- an Angular store -</h2>
+    <center>
+      <h1>Flatlander Crafted Gems</h1>
+      <h2>- an Angular store -</h2>
+    </center>
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="product in store.products | orderBy: '-price'">
         <h3>
         {{product.name}}
         <em class="pull-right"> {{product.price | currency }} </em>
         <p></p>
-        <img ng-src="{{product.images[0].full}}"/>
+        <center><img ng-src="{{product.images[0].full}}"/></center>
         <p></p>
         <button ng-show="product.canPurchase">Add to cart</button>
         <hr/>
