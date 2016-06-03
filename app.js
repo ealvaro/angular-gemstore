@@ -29,6 +29,26 @@ var gems = [{
     {
     full: "dodecahedron-02-full.gif",
     thumb: 'dodecahedron-02-thumb.gif'
+    }],
+  reviews: [{
+    stars: 5,
+    body: "I love this product!",
+    author: "joe@thomas.com"
+    },
+    {
+    stars: 1,
+    body: "This product is too expensive!",
+    author: "tim@hater.com"
+    },
+    {
+    stars: 3,
+    body: "I think this gem was just OK, could honestly use more shine, IMO.",
+    author: "JimDean@sausage.com"
+    },
+    {
+    stars: 4,
+    body: "Any gem with 12 faces is for me!",
+    author: "gemsRock@alyssaNicoll.com"
     }]
   },
   {
@@ -44,7 +64,18 @@ var gems = [{
     {
     full: "pentagonal-02-full.gif",
     thumb: 'pentagonal-02-thumb.gif'
+    }],
+  reviews: [{
+    stars: 4,
+    body: "I like this product, however it could be better.",
+    author: "joe@thomas.com"
+    },
+    {
+    stars: 3,
+    body: "This product is actually not that bad.",
+    author: "tim@hater.com"
     }]
+
   },
   {
   name: "Azurite Gem",
@@ -59,7 +90,18 @@ var gems = [{
     {
     full: "azurite-02-full.gif",
     thumb: 'azurite-02-thumb.gif'
+    }],
+  reviews: [{
+    stars: 2,
+    body: "I kinda like this product!",
+    author: "joe@thomas.com"
+    },
+    {
+    stars: 1,
+    body: "This product sucks",
+    author: "tim@hater.com"
     }]
+
   }];
 
 })();
