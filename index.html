@@ -7,65 +7,39 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body ng-controller="StoreController as store" >
-    <center>
-    <h1>Flatlander Crafted Gems</h1>
-    <h2>- an Angular store -</h2>
-    </center>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="product in store.products | orderBy: '-price'">
-        <h3 ng-include="'product-title.html'"></h3>
-        <center><img ng-src="{{product.images[0].full}}"/></center>
-        <p></p>
-        <button ng-show="product.canPurchase">Add to cart</button>
-        <hr/>
-        <section ng-controller="PanelController as panel">
-          <ul class="nav nav-pills">
-            <li ng-class="{ active:panel.isSelected(1) }">
-              <a href ng-click="panel.selectTab(1)" >Description</a>
-            </li>
-            <li ng-class="{ active:panel.isSelected(2) }">
-              <a href ng-click="panel.selectTab(2)" >Specifications</a>
-            </li>
-            <li ng-class="{ active:panel.isSelected(3) }">
-              <a href ng-click="panel.selectTab(3)" >Reviews</a>
+
+    <!--  Store Header  -->
+    <header>
+      <h1 class="text-center">Flatlander Crafted Gems</h1>
+      <h2 class="text-center">an Angular store</h2>
+    </header>
+
+    <!--  Products Container  -->
+    <div class="list-group">
+
+      <!--  Product Container  -->
+      <div class="list-group-item" ng-repeat="product in store.products | orderBy: '-price'">
+        <h3>
+        <product-title></product-title>
+        </h3>
+
+        <!-- Image Gallery  -->
+        <div ng-controller="GalleryController as gallery"  ng-show="product.images.length">
+          <div class="img-wrap">
+            <img ng-src="{{product.images[gallery.current]}}" />
+          </div>
+          <ul class="img-thumbnails clearfix">
+            <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+              <img ng-src="{{image}}" />
             </li>
           </ul>
-          <div class="panel" ng-show="panel.isSelected(1)" >
-            <h4>Description</h4>
-            <p>{{product.description}}</p>
-          </div>
-          <div class="panel" ng-show="panel.isSelected(2)" >
-            <h4>Specifications</h4>
-          <blockquote>None yet</blockquote>
         </div>
-        <div class="panel" ng-show="panel.isSelected(3)" >
-          <h4>Reviews</h4>
-          <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
-                                  ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-            <blockquote>
-              <b>Stars: {{reviewCtrl.review.stars}}</b>
-              {{reviewCtrl.review.body}}
-              <cite>by: {{reviewCtrl.review.author}}</cite>
-            </blockquote>
-            <div class="form-group">
-              <label>Submit a Review:</label>
-              <select class="form-control" ng-model="reviewCtrl.review.stars" required>
-                <option value="1">1 star</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-              </select>
-              <label>Comment:</label>
-              <textarea class="form-control" ng-model="reviewCtrl.review.body" required></textarea>
-              <label>by:</label>
-              <input class="form-control" ng-model="reviewCtrl.review.author" type="email" required/>
-              <input class="btn-primary" type="submit" value="Submit Review" />
-            </div>
-          </form>
-        </div>
-      </section>
-    </li>
-  </ul>
+        <button ng-show="product.canPurchase">Add to cart</button>
+        <hr/>
+
+        <!-- Product Tabs  -->
+        <product-panels></product-panels>
+      </div>
+    </div>
 </body>
 </html>

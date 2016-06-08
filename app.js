@@ -2,6 +2,13 @@
 
 var app = angular.module('store', [ ]);
 
+app.controller('GalleryController', function(){
+  this.current = 0;
+  this.setCurrent = function(imageNumber){
+    this.current = imageNumber || 0;
+  };
+});
+
 app.controller('StoreController', function(){
   this.products = gems;
 });
@@ -14,102 +21,131 @@ app.controller('ReviewController', function(){
   };
 });
 
-app.controller("PanelController", function(){
-  this.tab = 1;
-  this.selectTab = function(setTab) {
-    this.tab = setTab;
-  };
-  this.isSelected = function(checkTab) {
-    return this.tab === checkTab;
+app.directive('productTitle', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'product-title.html'
   };
 });
 
-var gems = [{
-  name: 'Dodecahedron',
-  price: 2.95,
-  description: 'Some gems have hidden qualities beyond their luster, beyond their shine...Dodeca is one of those gems.',
-  canPurchase: true,
-  soldOut: false,
-  images: [{
-    full: 'dodecahedron-01-full.gif',
-    thumb: 'dodecahedron-01-thumb.gif'
-    },
-    {
-    full: "dodecahedron-02-full.gif",
-    thumb: 'dodecahedron-02-thumb.gif'
-    }],
-  reviews: [{
-    stars: 5,
-    body: "I love this product!",
-    author: "joe@thomas.com"
-    },
-    {
-    stars: 1,
-    body: "This product is too expensive!",
-    author: "tim@hater.com"
-    },
-    {
-    stars: 3,
-    body: "I think this gem was just OK, could honestly use more shine, IMO.",
-    author: "JimDean@sausage.com"
-    },
-    {
-    stars: 4,
-    body: "Any gem with 12 faces is for me!",
-    author: "gemsRock@alyssaNicoll.com"
-    }]
-  },
-  {
-  name: "Pentagonal Gem",
-  price: 5.95,
-  description: "Origin of the Pentagonal gem is unknown, hence its low value. It has a very high shine and 12 sides, however.",
-  canPurchase: true,
-  soldOut: false,
-  images: [{
-    full: 'pentagonal-01-full.gif',
-    thumb: 'pentagonal-01-thumb.gif'
-    },
-    {
-    full: "pentagonal-02-full.gif",
-    thumb: 'pentagonal-02-thumb.gif'
-    }],
-  reviews: [{
-    stars: 4,
-    body: "I like this product, however it could be better.",
-    author: "joe@thomas.com"
-    },
-    {
-    stars: 3,
-    body: "This product is actually not that bad.",
-    author: "tim@hater.com"
-    }]
+app.directive('productDescription', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'product-description.html'
+  };
+});
 
-  },
-  {
-  name: "Azurite Gem",
-  price: 577.95,
-  description: "Origin of this precious stone is South Africa and has a very high value. It has a very high shine and 8 sides.",
-  canPurchase: true,
-  soldOut: false,
-  images: [{
-    full: 'azurite-01-full.gif',
-    thumb: 'azurite-01-thumb.gif'
-    },
-    {
-    full: "azurite-02-full.gif",
-    thumb: 'azurite-02-thumb.gif'
-    }],
-  reviews: [{
-    stars: 2,
-    body: "I kinda like this product!",
-    author: "joe@thomas.com"
-    },
-    {
-    stars: 1,
-    body: "This product sucks",
-    author: "tim@hater.com"
-    }]
+app.directive('productSpecs', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'product-specs.html'
+  };
+});
 
-  }];
+app.directive('productReviews', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'product-reviews.html'
+  };
+});
+
+app.directive('productPanels', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'product-panels.html',
+    controller: function(){
+        this.tab = 1;
+        this.selectTab = function(setTab) {
+          this.tab = setTab;
+        };
+        this.isSelected = function(checkTab) {
+          return this.tab === checkTab;
+        };
+      },
+    controllerAs: 'panel'
+  };
+});
+
+var gems = [
+    {
+      name: 'Azurite',
+      description: "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
+      shine: 8,
+      price: 110.50,
+      rarity: 7,
+      color: '#CCC',
+      faces: 14,
+      canPurchase: true,
+      soldOut: false,
+      images: [
+        "images/gem-02.gif",
+        "images/gem-05.gif",
+        "images/gem-09.gif"
+      ],
+      reviews: [{
+        stars: 5,
+        body: "I love this gem!",
+        author: "joe@example.org"
+      }, {
+        stars: 1,
+        body: "This gem sucks.",
+        author: "tim@example.org"
+      }]
+    },
+    {
+      name: 'Bloodstone',
+      description: "Origin of the Bloodstone is unknown, hence its low value. It has a very high shine and 12 sides, however.",
+      shine: 9,
+      price: 22.90,
+      rarity: 6,
+      color: '#EEE',
+      faces: 12,
+      canPurchase: true,
+      soldOut: false,
+      images: [
+        "images/gem-01.gif",
+        "images/gem-03.gif",
+        "images/gem-04.gif"
+      ],
+      reviews: [{
+        stars: 3,
+        body: "I think this gem was just OK, could honestly use more shine, IMO.",
+        author: "JimmyDean@example.org"
+      }, {
+        stars: 4,
+        body: "Any gem with 12 faces is for me!",
+        author: "gemsRock@example.org"
+      }]
+    },
+    {
+      name: 'Zircon',
+      description: "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
+      shine: 70,
+      price: 1100,
+      rarity: 2,
+      color: '#000',
+      faces: 6,
+      canPurchase: true,
+      soldOut: false,
+      images: [
+        "images/gem-06.gif",
+        "images/gem-07.gif",
+        "images/gem-08.gif"
+      ],
+      reviews: [{
+        stars: 1,
+        body: "This gem is WAY too expensive for its rarity value.",
+        author: "turtleguyy@example.org"
+      }, {
+        stars: 1,
+        body: "BBW: High Shine != High Quality.",
+        author: "LouisW407@example.org"
+      }, {
+        stars: 1,
+        body: "Don't waste your rubles!",
+        author: "nat@example.org"
+      }]
+    }
+  ];
 
 })();
