@@ -13,15 +13,11 @@
     </center>
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="product in store.products | orderBy: '-price'">
-        <h3>
-        {{product.name}}
-        <em class="pull-right"> {{product.price | currency }} </em>
-        <p></p>
+        <h3 ng-include="'product-title.html'"></h3>
         <center><img ng-src="{{product.images[0].full}}"/></center>
         <p></p>
         <button ng-show="product.canPurchase">Add to cart</button>
         <hr/>
-        </h3>
         <section ng-controller="PanelController as panel">
           <ul class="nav nav-pills">
             <li ng-class="{ active:panel.isSelected(1) }">
