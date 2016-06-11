@@ -2,13 +2,6 @@
 
 var app = angular.module('store', ['store-products']);
 
-app.controller('GalleryController', function(){
-  this.current = 0;
-  this.setCurrent = function(imageNumber){
-    this.current = imageNumber || 0;
-  };
-});
-
 app.controller('StoreController', function(){
   this.products = gems;
 });
